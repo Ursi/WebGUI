@@ -32,6 +32,14 @@ const webGui = {
     		visibility: 'visible',
         })
     },
+    transWait(elem) {
+        return new Promise(resolve => {
+            elem.addEventListener('transitionend', function eh() {
+                elem.removeEventListener('transitionend', eh);
+                resolve();
+            });
+        })
+    },
 }
 
 export default webGui;
