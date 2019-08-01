@@ -1,4 +1,10 @@
 const webGui = {
+	empty(container) {
+		let child;
+		while (child = container.firstChild) {
+			child.remove();
+		}
+	},
 	popup(element, refElement = undefined, xe = .5, xr = .5, ye = .5, yr = .5, dim = '55') {
 		let background = document.createElement('div')
 		Object.assign(background.style, {
