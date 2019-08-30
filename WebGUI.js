@@ -1,4 +1,4 @@
-const webGui = {
+export default {
 	empty(container) {
 		let child;
 		while (child = container.firstChild) {
@@ -54,6 +54,3 @@ const webGui = {
 		})
 	},
 }
-
-export default webGui;
-export {webGui};
