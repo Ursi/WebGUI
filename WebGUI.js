@@ -5,11 +5,11 @@ const webGui = {
 			child.remove();
 		}
 	},
-	popup(element, refElement = undefined, xe = .5, xr = .5, ye = .5, yr = .5, dim = '55') {
+	popup(element, refElement = undefined, {xe = .5, xr = .5, ye = .5, yr = .5, dim = 0x55} = {}) {
 		let background = document.createElement('div')
 		Object.assign(background.style, {
 			position: 'fixed',
-			background: '#000000' + dim,
+			background: '#000000' + dim.toString(16),
 			left: 0,
 			top: 0,
 			width: '100%',
@@ -36,7 +36,7 @@ const webGui = {
 			left: dims.left + xr * dims.width - xe * element.offsetWidth + 'px',
 			top: dims.top + yr * dims.height - ye * element.offsetHeight + 'px',
 			visibility: 'visible',
-		})
+		});
 	},
 	transWait(elem) {
 		return new Promise(resolve => {
