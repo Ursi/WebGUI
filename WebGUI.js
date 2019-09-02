@@ -15,7 +15,8 @@ export default {
 		zIndex = Number.MAX_SAFE_INTEGER,
 		reference,
 	} = {}) {
-		let background = document.createElement(`div`)
+		const background = document.createElement(`div`);
+		reference = reference || background;
 		Object.assign(background.style, {
 			position: `fixed`,
 			background: `#000000` + dim.toString(16),
@@ -33,20 +34,24 @@ export default {
 		Object.assign(element.style, {
 			position: `fixed`,
 			margin: 0,
-			visibility: `hidden`,
+			//visibility: `hidden`,
 			'box-shadow': boxShadow
 		})
 
 		background.appendChild(element);
 		document.body.appendChild(background);
-
-		let dims = (reference || background).getBoundingClientRect();
 		(new MutationObserver(()=> background.remove())).observe(background, {childList: true});
-		Object.assign(element.style, {
-			left: dims.left + xr * dims.width - xe * element.offsetWidth + `px`,
-			top: dims.top + yr * dims.height - ye * element.offsetHeight + `px`,
-			visibility: `visible`,
-		});
+		function position() {
+			const dims = reference.getBoundingClientRect();
+			Object.assign(element.style, {
+				left: dims.left + xr * dims.width - xe * element.offsetWidth + `px`,
+				top: dims.top + yr * dims.height - ye * element.offsetHeight + `px`,
+			});
+		}
+
+		position();
+		//element.style.visibility = `visible`;
+		window.addEventListener(`resize`, position);
 	},
 	transWait(elem) {
 		return new Promise(resolve => {
