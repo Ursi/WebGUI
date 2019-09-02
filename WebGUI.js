@@ -31,7 +31,7 @@ export default {
 		});
 
 		Object.assign(element.style, {
-			position: `relative`,
+			position: `fixed`,
 			margin: 0,
 			visibility: `hidden`,
 			'box-shadow': boxShadow
