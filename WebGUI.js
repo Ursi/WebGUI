@@ -11,7 +11,8 @@ export default {
 		ye = .5,
 		yr = .5,
 		dim = 0x55,
-		boxShadow = `0 0 10px`
+		boxShadow = `0 0 10px`,
+		zIndex = Number.MAX_SAFE_INTEGER,
 	} = {}) {
 		let background = document.createElement(`div`)
 		Object.assign(background.style, {
@@ -21,6 +22,7 @@ export default {
 			top: 0,
 			width: `100%`,
 			height: `100%`,
+			zIndex: zIndex,
 		})
 
 		background.addEventListener(`click`, function(e) {
