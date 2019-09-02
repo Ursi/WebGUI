@@ -5,7 +5,7 @@ export default {
 			child.remove();
 		}
 	},
-	popup(element, refElement = undefined, {
+	popup(element, {
 		xe = .5,
 		xr = .5,
 		ye = .5,
@@ -13,6 +13,7 @@ export default {
 		dim = 0x55,
 		boxShadow = `0 0 10px`,
 		zIndex = Number.MAX_SAFE_INTEGER,
+		reference,
 	} = {}) {
 		let background = document.createElement(`div`)
 		Object.assign(background.style, {
@@ -39,7 +40,7 @@ export default {
 		background.appendChild(element);
 		document.body.appendChild(background);
 
-		let dims = (refElement || background).getBoundingClientRect();
+		let dims = (reference || background).getBoundingClientRect();
 		(new MutationObserver(()=> background.remove())).observe(background, {childList: true});
 		Object.assign(element.style, {
 			left: dims.left + xr * dims.width - xe * element.offsetWidth + `px`,
