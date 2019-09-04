@@ -1,1 +1,1 @@
-### [Documentation](https://ursi.github.io/docs/WebGUI)
+### [Documentation](https://ursi.github.io/docs/web-gui)
