@@ -14,7 +14,7 @@ export default {
 		boxShadow = `0 0 10px`,
 		zIndex = Number.MAX_SAFE_INTEGER,
 		reference,
-	} = {}) {
+	} = {}, callback) {
 		const background = document.createElement(`div`);
 		reference = reference || background;
 		Object.assign(background.style, {
@@ -28,7 +28,10 @@ export default {
 		})
 
 		background.addEventListener(`click`, function(e) {
-			if (!e.composedPath().includes(element)) this.remove();
+			if (!e.composedPath().includes(element)) {
+				if (callback) callback(element, options);
+				this.remove()
+			};
 		});
 
 		Object.assign(element.style, {
