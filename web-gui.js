@@ -6,6 +6,7 @@ export default {
 		}
 	},
 	popup(element, {
+		reference,
 		xe = .5,
 		xr = .5,
 		ye = .5,
@@ -13,7 +14,6 @@ export default {
 		dim = 0x55,
 		boxShadow = `0 0 10px`,
 		zIndex = Number.MAX_SAFE_INTEGER,
-		reference,
 	} = {}, callback) {
 		const background = document.createElement(`div`);
 		reference = reference || background;
@@ -29,8 +29,8 @@ export default {
 
 		background.addEventListener(`click`, function(e) {
 			if (!e.composedPath().includes(element)) {
-				if (callback) callback(element, options);
-				this.remove()
+				if (callback) callback.call(element, reference, background);
+				this.remove();
 			};
 		});
 
