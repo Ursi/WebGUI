@@ -35,7 +35,6 @@ export default {
 
 		Object.assign(elem.style, {
 			position: `fixed`,
-			margin: 0,
 			//visibility: `hidden`,
 			'box-shadow': boxShadow
 		})
