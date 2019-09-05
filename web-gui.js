@@ -27,7 +27,7 @@ export default {
 			zIndex: zIndex,
 		})
 
-		background.addEventListener(`click`, function(e) {
+		background.addEventListener(`mousedown`, function(e) {
 			if (!e.composedPath().includes(elem)) {
 				callback.call(elem, background, reference);
 				window.removeEventListener(`resize`, position);
