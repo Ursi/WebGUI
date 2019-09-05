@@ -5,7 +5,7 @@ export default {
 			child.remove();
 		}
 	},
-	popup(element, {
+	popup(elem, {
 		reference,
 		xe = .5,
 		xr = .5,
@@ -28,32 +28,32 @@ export default {
 		})
 
 		background.addEventListener(`click`, function(e) {
-			if (!e.composedPath().includes(element)) {
-				if (callback) callback.call(element, reference, background);
+			if (!e.composedPath().includes(elem)) {
+				if (callback) callback.call(elem, reference, background);
 				this.remove();
 			};
 		});
 
-		Object.assign(element.style, {
+		Object.assign(elem.style, {
 			position: `fixed`,
 			margin: 0,
 			//visibility: `hidden`,
 			'box-shadow': boxShadow
 		})
 
-		background.appendChild(element);
+		background.appendChild(elem);
 		document.body.appendChild(background);
 		(new MutationObserver(()=> background.remove())).observe(background, {childList: true});
 		function position() {
 			const dims = reference.getBoundingClientRect();
-			Object.assign(element.style, {
-				left: dims.left + xr * dims.width - xe * element.offsetWidth + `px`,
-				top: dims.top + yr * dims.height - ye * element.offsetHeight + `px`,
+			Object.assign(elem.style, {
+				left: dims.left + xr * dims.width - xe * elem.offsetWidth + `px`,
+				top: dims.top + yr * dims.height - ye * elem.offsetHeight + `px`,
 			});
 		}
 
 		position();
-		//element.style.visibility = `visible`;
+		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
 	transWait(elem) {
