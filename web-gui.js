@@ -14,7 +14,7 @@ export default {
 		dim = 0x55,
 		boxShadow = `0 0 10px`,
 		zIndex = Number.MAX_SAFE_INTEGER,
-	} = {}, callback) {
+	} = {}, callback = background => background.remove()) {
 		const background = document.createElement(`div`);
 		reference = reference || background;
 		Object.assign(background.style, {
@@ -29,8 +29,7 @@ export default {
 
 		background.addEventListener(`click`, function(e) {
 			if (!e.composedPath().includes(elem)) {
-				if (callback) callback.call(elem, reference, background);
-				this.remove();
+				callback.call(elem, background, reference);
 			};
 		});
 
