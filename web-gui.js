@@ -60,7 +60,7 @@ export default {
 		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
-	spinner(size) {
+	spinner(size, {circles = 6, spacing = 1 / 3} = {}) {
 		const spinner = document.createElement(`div`);
 		spinner.classList.add(`wg-spinner`);
 		Object.assign(spinner.style, {
@@ -68,10 +68,12 @@ export default {
 			height: size,
 		});
 
-		for (let i = 0; i <= 5; i++) {
+		console.log(spacing);
+		for (let i = 0; i <= circles - 1; i++) {
 			const
 				ball = document.createElement(`div`),
-				ballSize = `calc(${size} / 4)`;
+				//ballSize = `calc(${Math.PI} * ${size} / ${n})`;
+				ballSize = `calc(${1 - spacing} * ${size} / ${1 - spacing + 1 / Math.sin(Math.PI / circles)})`;
 
 			Object.assign(ball.style, {
 				width: ballSize,
@@ -80,8 +82,7 @@ export default {
 				background: `black`,
 				position: `absolute`,
 				transformOrigin: `center calc(${size} / 2)`,
-				transform: `translateX(calc((${size} - ${ballSize}) / 2)) rotate(${i / 6}turn)`,
-				//transformOrigin: `${size * Math.SQRT1_2}px ${size * Math.SQRT1_2}px`,
+				transform: `translateX(calc((${size} - ${ballSize}) / 2)) rotate(${i / circles}turn)`,
 			});
 			spinner.appendChild(ball);
 		}
