@@ -42,7 +42,8 @@ export default {
 
 		background.appendChild(elem);
 		document.body.appendChild(background);
-		(new MutationObserver(()=> {
+		(new MutationObserver(function(){
+			this.disconnect();
 			background.remove();
 			window.removeEventListener(`resize`, position);
 		})).observe(background, {childList: true});
