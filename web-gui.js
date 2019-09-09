@@ -60,6 +60,34 @@ export default {
 		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
+	spinner(size) {
+		const spinner = document.createElement(`div`);
+		spinner.classList.add(`wg-spinner`);
+		Object.assign(spinner.style, {
+			width: size,
+			height: size,
+		});
+
+		for (let i = 0; i <= 5; i++) {
+			const
+				ball = document.createElement(`div`),
+				ballSize = `calc(${size} / 4)`;
+
+			Object.assign(ball.style, {
+				width: ballSize,
+				height: ballSize,
+				borderRadius: `calc(${ballSize} / 2)`,
+				background: `black`,
+				position: `absolute`,
+				transformOrigin: `center calc(${size} / 2)`,
+				transform: `translateX(calc((${size} - ${ballSize}) / 2)) rotate(${i / 6}turn)`,
+				//transformOrigin: `${size * Math.SQRT1_2}px ${size * Math.SQRT1_2}px`,
+			});
+			spinner.appendChild(ball);
+		}
+
+		return spinner;
+	},
 	transWait(elem) {
 		return new Promise(resolve => {
 			elem.addEventListener(`transitionend`, function eh() {
