@@ -2,7 +2,7 @@ const style = document.createElement('style');
 style.textContent = `for web-gui`;
 document.head.appendChild(style);
 style.sheet.insertRule(`
-	@keyframes wg-spinner {
+	@keyframes wg-loader {
 		from {
 			opacity: 1;
 		} to {
@@ -73,43 +73,43 @@ export default {
 		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
-	spinner({
+	loader({
 		size = `1em`,
-		circles = 6,
+		disks = 6,
 		spacing = 1 / 3,
 		color = `#0005`,
 		period = 1,
 		} = {}
 	) {
-		const spinner = document.createElement(`div`);
-		spinner.classList.add(`wg-spinner`);
-		Object.assign(spinner.style, {
+		const loaderElem = document.createElement(`div`);
+		loaderElem.classList.add(`wg-loader`);
+		Object.assign(loaderElem.style, {
 			width: size,
 			height: size,
 		});
 
 		console.log(spacing);
-		for (let i = 0; i <= circles - 1; i++) {
+		for (let i = 0; i <= disks - 1; i++) {
 			const
-				ball = document.createElement(`div`),
-				//ballSize = `calc(${Math.PI} * ${size} / ${n})`;
-				ballSize = `calc(${1 - spacing} * ${size} / ${1 - spacing + 1 / Math.sin(Math.PI / circles)})`;
+				disk = document.createElement(`div`),
+				//diskSize = `calc(${Math.PI} * ${size} / ${n})`;
+				diskSize = `calc(${1 - spacing} * ${size} / ${1 - spacing + 1 / Math.sin(Math.PI / disks)})`;
 
-			Object.assign(ball.style, {
-				width: ballSize,
-				height: ballSize,
-				borderRadius: `calc(${ballSize} / 2)`,
+			Object.assign(disk.style, {
+				width: diskSize,
+				height: diskSize,
+				borderRadius: `calc(${diskSize} / 2)`,
 				background: color,
 				position: `absolute`,
 				transformOrigin: `center calc(${size} / 2)`,
-				transform: `translateX(calc((${size} - ${ballSize}) / 2)) rotate(${i / circles}turn)`,
-				animation: `wg-spinner ${period}s linear infinite`,
-				animationDelay: period * (i - circles) / circles + `s`
+				transform: `translateX(calc((${size} - ${diskSize}) / 2)) rotate(${i / disks}turn)`,
+				animation: `wg-loader ${period}s linear infinite`,
+				animationDelay: period * (i - disks) / disks + `s`
 			});
-			spinner.appendChild(ball);
+			loaderElem.appendChild(disk);
 		}
 
-		return spinner;
+		return loaderElem;
 	},
 	transWait(elem) {
 		return new Promise(resolve => {
