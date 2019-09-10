@@ -71,7 +71,7 @@ export default {
 		position();
 		window.addEventListener(`resize`, position);
 	},
-	position(elem, {
+	place(elem, {
 		reference = document.body,
 		xe = .5,
 		xr = .5,
