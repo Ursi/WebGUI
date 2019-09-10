@@ -128,8 +128,7 @@ export default {
 				position: `absolute`,
 				transformOrigin: `center calc(${size} / 2)`,
 				transform: `translateX(calc((${size} - ${diskSize}) / 2)) rotate(${i / disks}turn)`,
-				animation: `wg-loader ${period}s linear infinite`,
-				animationDelay: period * (i - disks) / disks + `s`
+				animation: `${period}s linear ${period * (i - disks) / disks}s infinite wg-loader`,
 			});
 			loaderElem.appendChild(disk);
 		}
