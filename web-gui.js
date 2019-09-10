@@ -72,7 +72,7 @@ export default {
 		window.addEventListener(`resize`, position);
 	},
 	place(elem, {
-		reference = document.body,
+		reference = document.querySelector(`html`),
 		xe = .5,
 		xr = .5,
 		ye = .5,
