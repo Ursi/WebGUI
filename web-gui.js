@@ -1,3 +1,16 @@
+const style = document.createElement('style');
+style.textContent = `for web-gui`;
+document.head.appendChild(style);
+style.sheet.insertRule(`
+	@keyframes wg-spinner {
+		from {
+			opacity: 1;
+		} to {
+			opacity: 0;
+		}
+	}
+`);
+
 export default {
 	empty(container) {
 		let child;
@@ -60,7 +73,13 @@ export default {
 		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
-	spinner(size, {circles = 6, spacing = 1 / 3} = {}) {
+	spinner(size, {
+		circles = 6,
+		spacing = 1 / 3,
+		color = `#0005`,
+		period = 1,
+		} = {}
+	) {
 		const spinner = document.createElement(`div`);
 		spinner.classList.add(`wg-spinner`);
 		Object.assign(spinner.style, {
@@ -79,10 +98,12 @@ export default {
 				width: ballSize,
 				height: ballSize,
 				borderRadius: `calc(${ballSize} / 2)`,
-				background: `black`,
+				background: color,
 				position: `absolute`,
 				transformOrigin: `center calc(${size} / 2)`,
 				transform: `translateX(calc((${size} - ${ballSize}) / 2)) rotate(${i / circles}turn)`,
+				animation: `wg-spinner ${period}s linear infinite`,
+				animationDelay: period * (i - circles) / circles + `s`
 			});
 			spinner.appendChild(ball);
 		}
