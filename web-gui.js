@@ -78,10 +78,9 @@ export default {
 		ye = .5,
 		yr = .5,
 		zIndex = Number.MAX_SAFE_INTEGER,
-		position = `absolute`,
 	} = {}) {
 		Object.assign(elem.style, {
-			position,
+			position: `absolute`,
 			zIndex,
 		});
 
