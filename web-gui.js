@@ -73,7 +73,8 @@ export default {
 		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
 	},
-	spinner(size, {
+	spinner({
+		size = `1em`,
 		circles = 6,
 		spacing = 1 / 3,
 		color = `#0005`,
