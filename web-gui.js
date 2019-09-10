@@ -37,7 +37,7 @@ export default {
 			top: 0,
 			width: `100%`,
 			height: `100%`,
-			zIndex: zIndex,
+			zIndex,
 		})
 
 		background.addEventListener(`mousedown`, function(e) {
@@ -49,8 +49,7 @@ export default {
 
 		Object.assign(elem.style, {
 			position: `fixed`,
-			//visibility: `hidden`,
-			'box-shadow': boxShadow
+			boxShadow,
 		})
 
 		background.appendChild(elem);
@@ -70,8 +69,34 @@ export default {
 		}
 
 		position();
-		//elem.style.visibility = `visible`;
 		window.addEventListener(`resize`, position);
+	},
+	position(elem, {
+		reference = document.body,
+		xe = .5,
+		xr = .5,
+		ye = .5,
+		yr = .5,
+		zIndex = Number.MAX_SAFE_INTEGER,
+		position = `absolute`,
+	} = {}) {
+		Object.assign(elem.style, {
+			position,
+			zIndex,
+		});
+
+		document.body.appendChild(elem);
+
+		function positionElem() {
+			const dims = reference.getBoundingClientRect();
+			Object.assign(elem.style, {
+				left: dims.left + xr * dims.width - xe * elem.offsetWidth + `px`,
+				top: dims.top + yr * dims.height - ye * elem.offsetHeight + `px`,
+			});
+		}
+
+		positionElem();
+		window.addEventListener(`resize`, positionElem);
 	},
 	loader({
 		size = `1em`,
