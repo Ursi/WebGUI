@@ -12,6 +12,47 @@ style.sheet.insertRule(`
 `);
 
 export default {
+	charWrap: function f(node, options = {}, count = 0, path = []) {
+		const {
+			elem: elemStr = `span`,
+			classes,
+			listeners,
+			data,
+		} = options;
+
+		if (node.nodeType === node.TEXT_NODE) {
+			const frag = document.createDocumentFragment();
+			for (let char of node.textContent) {
+				const elem = document.createElement(elemStr);
+				if (classes) {
+					const classStr = classes(char, count, path).join(` `);
+					if (classStr) elem.setAttribute(`class`, classStr);
+				}
+
+				if (data)
+					for (let dattr of data(char, count, path))
+						elem.dataset[dattr[0]] = dattr[1];
+
+				if (listeners)
+					for (let listener of listeners(char, count, path))
+						elem.addEventListener(listener[0], listener[1]);
+
+				elem.textContent = char;
+				frag.appendChild(elem);
+				count++
+			}
+
+			return {node: frag, count};
+		} else {
+			for (let child of [...node.childNodes]) {
+				const nodeAndCount = f(child, options, count, path.concat([node]));
+				count = nodeAndCount.count;
+				node.replaceChild(nodeAndCount.node, child);
+			}
+
+			return {node, count};
+		}
+	},
 	empty(container) {
 		let child;
 		while (child = container.firstChild) {
