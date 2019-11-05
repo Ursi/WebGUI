@@ -138,6 +138,14 @@ export default {
 		positionElem();
 		window.addEventListener(`resize`, positionElem);
 	},
+	waitFrames(n) {
+		const iterate = function f(n, callback) {
+			if (n === 0) callback();
+			else requestAnimationFrame(()=> f(n - 1, callback));
+		}
+
+		return new Promise(resolve => iterate(n, resolve));
+	},
 	loader({
 		size = `1em`,
 		disks = 6,
